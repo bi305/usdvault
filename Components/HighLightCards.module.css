@@ -1,0 +1,13 @@
+.Font_13px {
+  font-size: 13px;
+}
+.border_shadow {
+  box-shadow: -7px 10px 30px 1px #c5c4c4;
+}
+.more {
+  cursor: pointer;
+  color: rgb(16, 16, 233);
+}
+.rounded_borders {
+  border-radius: 10px;
+}

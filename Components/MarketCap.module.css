@@ -1,0 +1,22 @@
+.sapce_between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.para {
+  color: rgb(88 102 126);
+  font-size: 15px;
+}
+.inner_para {
+  color: rgb(88 102 126);
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.ml {
+  margin-left: 15px;
+}
+.span {
+  text-decoration: underline;
+  cursor: pointer;
+}

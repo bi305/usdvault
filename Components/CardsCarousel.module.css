@@ -1,0 +1,27 @@
+.para {
+  font: 300;
+  font-size: 13px;
+  color: #58667e;
+}
+
+.para > span {
+  font-weight: 600;
+  color: black;
+  text-decoration: none;
+}
+
+.an:hover {
+  text-decoration: none;
+}
+
+.space_between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.round_borders {
+  border-radius: 15px;
+}
+.a {
+  text-decoration: none;
+}

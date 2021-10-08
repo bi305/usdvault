@@ -1,0 +1,91 @@
+.rTable {
+  display: table;
+  width: 100%;
+}
+
+.rTableRow {
+  display: table-row;
+  width: 100%;
+  z-index: 0;
+}
+.rTableRow:hover {
+  background-color: #ececec;
+}
+
+.rTableHeading {
+  display: table-header-group;
+  position: sticky;
+  top: 50px;
+  background-color: white;
+}
+
+.rTableBody {
+  display: table-row-group;
+}
+
+.rTableFoot {
+  display: table-footer-group;
+}
+
+.rTableCell {
+  padding: 20px 10px;
+  display: table-cell;
+  border-bottom: 1px solid #ececec;
+  text-align: center;
+  min-width: 110px;
+  max-width: 110px;
+}
+
+.rTableHead {
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px 10px;
+  display: table-cell;
+  border-bottom: 1px solid #ececec;
+  text-align: center;
+  min-width: 110px;
+  max-width: 110px;
+}
+.firstCol {
+  color: black;
+  position: sticky;
+  left: 0;
+  min-width: 110px;
+  z-index: 1;
+}
+
+@media screen and (max-width: 990px) {
+  .firstCol {
+    background-color: #ffffff;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+}
+
+.div {
+  overflow: scroll;
+}
+
+.HeaderDiv {
+  overflow: scroll;
+  position: sticky;
+  top: 55px;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lightblue;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
