@@ -1,16 +1,23 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: "Red Hat Display";
+}
+::-webkit-scrollbar {
+	width: 5px;
+	height: 10px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+::-webkit-scrollbar-track {
+	border-radius: 1px;
 }
 
-* {
-  box-sizing: border-box;
+::-webkit-scrollbar-thumb {
+	background: lightblue;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #b30000;
 }

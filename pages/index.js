@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head' 
 import Table from '../Components/Table';
 import CardsCarousel from '../Components/CardsCarousel ';
 import NavBar from '../Components/NavBar';
