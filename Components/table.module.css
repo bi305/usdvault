@@ -30,7 +30,7 @@
 .rTableCell {
 	padding: 20px 10px;
 	display: table-cell;
-	border-bottom: 1px solid #ececec;
+	border: 1px solid #ececec;
 	text-align: center;
 	min-width: 110px;
 	max-width: 110px;
@@ -41,7 +41,7 @@
 	font-size: 15px;
 	padding: 10px 10px;
 	display: table-cell;
-	border-bottom: 1px solid #ececec;
+	border: 1px solid #ececec;
 	text-align: center;
 	min-width: 110px;
 	max-width: 110px;
