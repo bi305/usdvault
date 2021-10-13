@@ -235,6 +235,7 @@ const Table = ({ coins }) => {
 
     const [coinss, setCoins] = useState([])
     useEffect(() => {
+
         if (alldata) {
             if (alldata.error) {
                 // Handle error
@@ -253,8 +254,12 @@ const Table = ({ coins }) => {
         if (indexPageUrl == '?page=1') {
             router.push(`${window.location.origin}`, undefined, { shallow: true })
         }
+        console.log(window.location.origin)
+
+
 
     }, [indexPageUrl])
+
 
 
     const handlePagination = page => {
