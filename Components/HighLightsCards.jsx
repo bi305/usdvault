@@ -40,7 +40,7 @@ const HighLightsCards = ({ showState }) => {
 
                                     <div className="d-flex justify-content-between  py-2">
                                         <div >
-                                            &nbsp; &nbsp;1 &nbsp; <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png"alt="img" width="15px" alt="img" className="rounded-circle" /> &nbsp; Cardano ADA
+                                            &nbsp; &nbsp;1 &nbsp; <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png" width="15px" alt="img" className="rounded-circle" /> &nbsp; Cardano ADA
                                         </div>
                                         <div>
                                             2.28%

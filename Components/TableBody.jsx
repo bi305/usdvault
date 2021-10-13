@@ -26,7 +26,7 @@ const TableBody = ({ coinMArketCapData }) => {
                                         <img src={value.Logo} alt="coin" classNameName="img-fluid mr-2  " width="20px" />
                                         <span className=" " style={{ textDecoration: 'none' }}>
                                             {value.Symbol}
-                                            <span className=" ml-2 badge badge-secondary" style={{ textDecoration: 'none' }} style={{ textDecoration: 'none' }} >
+                                            <span className=" ml-2 badge badge-secondary" style={{ textDecoration: 'none' }}   >
                                                 {value.coinBadge}
                                             </span>
                                         </span>
