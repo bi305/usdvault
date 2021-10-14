@@ -1,5 +1,6 @@
 import styles from './table.module.css'
-import Image from 'next/image'
+
+
 const TableBody = ({ coinMArketCapData }) => {
 
     return (
@@ -22,7 +23,7 @@ const TableBody = ({ coinMArketCapData }) => {
                                     </div>
                                     <div className="rTableCell firstCol">
 
-                                        <Image src={value.Logo} alt="coin" classNameName="img-fluid mr-2  " width="20px" />
+                                        <img src={value.Logo} alt="coin" classNameName="img-fluid mr-2  " width="20px" />
                                         <span className=" " style={{ textDecoration: 'none' }}>
                                             {value.Symbol}
                                             <span className=" ml-2 badge badge-secondary" style={{ textDecoration: 'none' }}   >

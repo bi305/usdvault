@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import Table from '../Components/Table';
 import CardsCarousel from '../Components/CardsCarousel ';
 import NavBar from '../Components/NavBar';
 import HighLightsCards from '../Components/HighLightsCards';
+
+import { useRouter } from 'next/router'
 function Home({ coinsData }) {
 
 
+
+  const router = useRouter()
 
 
   const [state, setstate] = useState(false)
@@ -14,7 +18,17 @@ function Home({ coinsData }) {
   const stateHandler = (state) => {
     setstate(state)
   }
+  let indexPageUrl = ""
+  if (typeof window !== "undefined") {
+    indexPageUrl = window.location.search
+  }
+  useEffect(() => {
+    if (indexPageUrl === '?page=1') {
+      router.push(`${window.location.origin}`, undefined, { shallow: true })
 
+      console.log(indexPageUrl)
+    }
+  }, [indexPageUrl])
   return (
 
 
@@ -26,6 +40,7 @@ function Home({ coinsData }) {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Red Hat Display" />
       </Head>
+
 
       <NavBar />
       <CardsCarousel showCard={stateHandler} state={state} />
@@ -45,7 +60,7 @@ export const getServerSideProps = async ({ query }) => {
   let coinsData = null
   // Fetch data from external API
   try {
-    const res = await fetch(`http://localhost:5000/api?page=${page}`)
+    const res = await fetch(`http://ec2-54-167-145-123.compute-1.amazonaws.com:5000/api?page=${page}`)
     if (res.status !== 200) {
       throw new Error("Failed to fetch")
     }
