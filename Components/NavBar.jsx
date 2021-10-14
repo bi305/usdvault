@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image'
 import {
     Collapse,
     Navbar,
@@ -42,7 +43,7 @@ const Example = (props) => {
             <TopBar />
             <Navbar id="navbar_top" color="white" light expand="md" fixed="top">
                 <NavbarBrand href="/">
-                    <img className="img-fluid w-75 ml-3" src="https://s2.coinmarketcap.com/static/cloud/img/coinmarketcap_1.svg?_=502d3f0" alt="" />
+                    <Image className="img-fluid w-75 ml-3" src="https://s2.coinmarketcap.com/static/cloud/img/coinmarketcap_1.svg?_=502d3f0" alt="" />
                 </NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>

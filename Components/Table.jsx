@@ -182,6 +182,9 @@ import TableHeader from './TableHeader'
 import Router, { withRouter, useRouter } from 'next/router'
 
 
+
+
+
 const Table = ({ coins }) => {
     const alldata = coins.findResult
     const totalPages = coins.totalPages
@@ -209,18 +212,30 @@ const Table = ({ coins }) => {
 
     )
 
-    const [loading, setLoading] = useState(false)
-    const startLoading = () => setLoading(true)
-    const stopLoading = () => setLoading(false)
+    let indexPageUrl = ""
+    if (typeof window !== "undefined") {
+        indexPageUrl = window.location.search
+    }
     useEffect(() => {
-        // Router event handler
-        Router.events.on("routeChangeStart", startLoading)
-        Router.events.on("routeChangeComplete", stopLoading)
-        return () => {
-            Router.events.off("routeChangeStart", startLoading)
-            Router.events.off("routeChangeComplete", stopLoading)
+        if (indexPageUrl === '?page=1') {
+            router.push(`${window.location.origin}`, undefined, { shallow: true })
+
+            console.log(indexPageUrl)
         }
-    }, [])
+    }, [indexPageUrl])
+
+    // const [loading, setLoading] = useState(false)
+    // const startLoading = () => setLoading(true)
+    // const stopLoading = () => setLoading(false)
+    // useEffect(() => {
+    //     // Router event handler
+    //     Router.events.on("routeChangeStart", startLoading)
+    //     Router.events.on("routeChangeComplete", stopLoading)
+    //     return () => {
+    //         Router.events.off("routeChangeStart", startLoading)
+    //         Router.events.off("routeChangeComplete", stopLoading)
+    //     }
+    // }, [])
 
     const HeaderData = [
         { id: 1, headerName: 'Id', width: '30px', maxWidth: '30px' },
@@ -247,18 +262,6 @@ const Table = ({ coins }) => {
 
         }
     }, [alldata])
-
-
-    const indexPageUrl = window.location.search
-    useEffect(() => {
-        if (indexPageUrl == '?page=1') {
-            router.push(`${window.location.origin}`, undefined, { shallow: true })
-        }
-        console.log(window.location.origin)
-
-
-
-    }, [indexPageUrl])
 
 
 
