@@ -175,7 +175,7 @@
 // export default withRouter(Table)
 
 import { useEffect, useState } from 'react'
-import $, { post } from 'jquery';
+import $ from 'jquery';
 import ReactPaginate from 'react-paginate'
 import TableBody from './TableBody'
 import TableHeader from './TableHeader'
@@ -186,6 +186,7 @@ import Router, { withRouter, useRouter } from 'next/router'
 
 
 const Table = ({ coins }) => {
+
     const alldata = coins.findResult
     const totalPages = coins.totalPages
     const currentPage = coins.currentPage
@@ -212,17 +213,9 @@ const Table = ({ coins }) => {
 
     )
 
-    let indexPageUrl = ""
-    if (typeof window !== "undefined") {
-        indexPageUrl = window.location.search
-    }
-    useEffect(() => {
-        if (indexPageUrl === '?page=1') {
-            router.push(`${window.location.origin}`, undefined, { shallow: true })
 
-            console.log(indexPageUrl)
-        }
-    }, [indexPageUrl])
+
+
 
     // const [loading, setLoading] = useState(false)
     // const startLoading = () => setLoading(true)
@@ -251,6 +244,7 @@ const Table = ({ coins }) => {
     const [coinss, setCoins] = useState([])
     useEffect(() => {
 
+
         if (alldata) {
             if (alldata.error) {
                 // Handle error
@@ -272,7 +266,7 @@ const Table = ({ coins }) => {
         query.page = page.selected + 1
         router.push({
             pathname: path,
-            query: query,
+            query: query.page === 1 ? '' : query,
         })
     }
 
@@ -285,6 +279,8 @@ const Table = ({ coins }) => {
 
 
             <ReactPaginate
+
+                // hrefBuilder={() => { return currentPage.map(key => { return key.selected }) }}
                 previousLabel={"Previous"}
                 nextLabel={"next"}
                 breakLabel={"..."}
@@ -313,4 +309,4 @@ const Table = ({ coins }) => {
 
 
 
-export default withRouter(Table)
+export default Table

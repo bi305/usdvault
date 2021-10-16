@@ -4,6 +4,7 @@ import Table from '../Components/Table';
 import CardsCarousel from '../Components/CardsCarousel ';
 import NavBar from '../Components/NavBar';
 import HighLightsCards from '../Components/HighLightsCards';
+import AntdTable from '../Components/AntdTable';
 
 import { useRouter } from 'next/router'
 function Home({ coinsData }) {
@@ -18,17 +19,9 @@ function Home({ coinsData }) {
   const stateHandler = (state) => {
     setstate(state)
   }
-  let indexPageUrl = ""
-  if (typeof window !== "undefined") {
-    indexPageUrl = window.location.search
-  }
-  useEffect(() => {
-    if (indexPageUrl === '?page=1') {
-      router.push(`${window.location.origin}`, undefined, { shallow: true })
 
-      console.log(indexPageUrl)
-    }
-  }, [indexPageUrl])
+
+
   return (
 
 
@@ -42,25 +35,26 @@ function Home({ coinsData }) {
       </Head>
 
 
-      <NavBar />
+      {/* <NavBar /> */}
       <CardsCarousel showCard={stateHandler} state={state} />
       <HighLightsCards showState={state} />
-      <Table coins={coinsData} />
+      {/* <Table coins={coinsData} /> */}
+      <AntdTable datas={coinsData} />
     </div>
   )
 }
 
 
 
-export const getServerSideProps = async ({ query }) => {
+export const getServerSideProps = async ({ query, }) => {
+
   // Fetch the first page as default
   // const { page = 1, limit = 10 } = query
   const page = query.page || 1
-
   let coinsData = null
   // Fetch data from external API
   try {
-    const res = await fetch(`http://ec2-54-167-145-123.compute-1.amazonaws.com:5000/api?page=${page}`)
+    const res = await fetch(`http://api.usdvault.com/table?${page}=1&limit=100`)
     if (res.status !== 200) {
       throw new Error("Failed to fetch")
     }
@@ -69,7 +63,12 @@ export const getServerSideProps = async ({ query }) => {
     coinsData = { error: { message: err.message } }
   }
   // Pass data to the page via props
-  return { props: { coinsData } }
+
+  return {
+    props: {
+      coinsData
+    }
+  }
 }
 
 
