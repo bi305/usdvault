@@ -6,12 +6,7 @@ import NavBar from '../Components/NavBar';
 import HighLightsCards from '../Components/HighLightsCards';
 import AntdTable from '../Components/AntdTable';
 
-import { useRouter } from 'next/router'
 function Home({ coinsData }) {
-
-
-
-  const router = useRouter()
 
 
   const [state, setstate] = useState(false)
@@ -46,30 +41,31 @@ function Home({ coinsData }) {
 
 
 
-export const getServerSideProps = async ({ query, }) => {
+// export async function getServerSideProps({ query: page = 1 }) {
 
-  // Fetch the first page as default
-  // const { page = 1, limit = 10 } = query
-  const page = query.page || 1
-  let coinsData = null
-  // Fetch data from external API
-  try {
-    const res = await fetch(`http://api.usdvault.com/table?${page}=1&limit=100`)
-    if (res.status !== 200) {
-      throw new Error("Failed to fetch")
-    }
-    coinsData = await res.json()
-  } catch (err) {
-    coinsData = { error: { message: err.message } }
-  }
-  // Pass data to the page via props
+//   // // Fetch the first page as default
+//   const { page = 1, limit = 10 } = query
+//   // const page = query.page || 1
+//   let coinsData = null
+//   // Fetch data from external API
+//   try {
+//     const res = await fetch(`http://api.usdvault.com/get/table?page=${page}`)
+//     if (res.status !== 200) {
+//       throw new Error("Failed to fetch")
+//     }
+//     coinsData = await res.json()
+//   } catch (err) {
+//     coinsData = { error: { message: err.message } }
+//   }
+//   // Pass data to the page via props
 
-  return {
-    props: {
-      coinsData
-    }
-  }
-}
+//   return {
+//     props: {
+//       coinsData,
+//       page: +page
+//     }
+//   }
+// }
 
 
 export default Home

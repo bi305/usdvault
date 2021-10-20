@@ -1,130 +1,120 @@
 import { Table, Switch } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "antd/dist/antd.css";
-import { Pagination } from 'antd';
 import { useRouter } from 'next/router';
 
-
+// ID, Type, Name, Price, 24Hr, Market Cap, Volume 24Hr, Circulating Supply
 const columns = [
     {
-        title: 'coin Name',
+        title: 'Id',
         width: 100,
-        dataIndex: 'noname',
+        dataIndex: 'id',
         key: 'name',
         fixed: 'left',
 
     },
     {
-        title: 'id',
+        title: 'Name',
         width: 100,
-        dataIndex: 'id',
+        dataIndex: 'nm',
         key: 'id',
         fixed: 'left',
     },
     {
-        title: 'Column 1',
+        title: 'Price',
         dataIndex: 'logo',
         key: '1',
         width: 150,
     },
     {
-        title: 'Column 2',
-        dataIndex: 'address',
+        title: '24Hr',
+        dataIndex: 'tfHrc',
         key: '2',
         width: 150,
     },
     {
-        title: 'Column 3',
-        dataIndex: 'address',
+        title: 'Market Cap',
+        dataIndex: 'mc',
         key: '3',
         width: 150,
     },
     {
-        title: 'Column 4',
-        dataIndex: 'address',
+        title: 'Volume 24Hr',
+        dataIndex: 'vtfHr',
         key: '4',
         width: 150,
     },
     {
-        title: 'Column 5',
-        dataIndex: 'address',
+        title: 'Circulating Supply',
+        dataIndex: 'cs',
         key: '5',
         width: 150,
     },
-    {
-        title: 'Column 6',
-        dataIndex: 'address',
-        key: '6',
-        width: 150,
-    },
-    {
-        title: 'Column 7',
-        dataIndex: 'address',
-        key: '7',
-        width: 150,
-    },
-    { title: 'Column 8', dataIndex: 'address', key: '8' },
+
 
 ];
 
-const data = []
-console.log(data)
-
-const Demo = ({ datas }) => {
-    const [Loading, setLoading] = React.useState(false)
-
-    const router = useRouter()
-    const alldata = datas.findResult
-    const currentPage = datas.currentPage
-    const totalItems = datas.totalCoins
-    alldata.map((key) => {
-        return (
-            data.push({
-                id: key.id,
-                noname: key.Name,
-                logo: <> <span>{key.Name}</span> <img src={key.Logo} width="20px" /> </>,
-                address: key.Logo,
-            }
-            ))
-    })
-    useEffect(() => {
-        setLoading(true)
-        if (alldata) {
-            if (alldata.error) {
-                // Handle error
-            }
-            setLoading(false)
-        }
-    }, [alldata])
-
-
+const Demo = () => {
 
     const [fixedTop, setFixedTop] = React.useState(false);
+    const [coinData, setcoinData] = useState([])
+    const [Page, setPage] = useState(1);
+    const [rowsPerPage, setrowsPerPage] = useState(20)
+    const [Loading, setLoading] = useState(false)
 
+    let limit = rowsPerPage;
+    let pageSize = Page
+    useEffect(() => {
+
+        const getCoins = async () => {
+            setLoading(true)
+            try {
+                const res = await fetch(
+                    `http://api.usdvault.com/get/table?page=${pageSize}&limit=${limit}`
+                );
+                const data = await res.json();
+
+                setcoinData(data);
+
+            }
+
+            catch (error) {
+
+                setLoading(false)
+            }
+            setLoading(false)
+
+        };
+
+        getCoins();
+    }, [limit, pageSize]);
+
+    const alldata = coinData.data
+    const TotalPage = coinData.totalCoins
 
 
     return (
         <>
             <Table
                 loading={Loading}
-                pagination={{
-                    onChange: (page, pageSize) => {
-
-                        const path = router.pathname
-                        const query = router.query
-                        query.page = page
-                        router.push({
-                            pathname: path,
-                            query: query.page === 1 ? '' : query,
-                        })
-                    },
-                    onmouseenter: () => {
-                        <a href={page}>{page}</a>
-                    }
-                }
-                }
                 columns={columns}
-                dataSource={data}
+                dataSource={alldata}
+                pagination={{
+                    defaultCurrent: 1,
+                    total: TotalPage,
+                    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+                    defaultPageSize: 20,
+
+                    onChange: (page, pageSize) => {
+                        console.log(page, pageSize)
+                        setPage(page);
+                        setrowsPerPage(pageSize);
+
+                    },
+
+
+                }}
+
                 scroll={{ x: 1500 }}
                 summary={pageData => (
                     <Table.Summary fixed={fixedTop ? 'top' : 'bottom'}>
@@ -139,14 +129,12 @@ const Demo = ({ datas }) => {
                                     }}
                                 />
                             </Table.Summary.Cell>
-                            <Table.Summary.Cell index={2} colSpan={8}>
-                                Scroll Context
-                            </Table.Summary.Cell>
-                            <Table.Summary.Cell index={11}>Fix Right</Table.Summary.Cell>
+
                         </Table.Summary.Row>
                     </Table.Summary>
                 )}
                 sticky
+
             />
 
 
