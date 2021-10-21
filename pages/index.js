@@ -30,10 +30,10 @@ function Home({ coinsData }) {
       </Head>
 
 
-      {/* <NavBar /> */}
+      <NavBar />
       <CardsCarousel showCard={stateHandler} state={state} />
       <HighLightsCards showState={state} />
-      {/* <Table coins={coinsData} /> */}
+
       <AntdTable datas={coinsData} />
     </div>
   )

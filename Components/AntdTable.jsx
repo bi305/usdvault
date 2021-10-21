@@ -104,15 +104,10 @@ const Demo = () => {
                     total: TotalPage,
                     showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
                     defaultPageSize: 20,
-
                     onChange: (page, pageSize) => {
-                        console.log(page, pageSize)
                         setPage(page);
                         setrowsPerPage(pageSize);
-
                     },
-
-
                 }}
 
                 scroll={{ x: 1500 }}
