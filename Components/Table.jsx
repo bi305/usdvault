@@ -179,7 +179,7 @@ import $ from 'jquery';
 import ReactPaginate from 'react-paginate'
 import TableBody from './TableBody'
 import TableHeader from './TableHeader'
-import Router, { withRouter, useRouter } from 'next/router'
+import useRouter from 'next/router'
 
 
 
@@ -216,7 +216,7 @@ const Table = ({ coins }) => {
 
 
 
- 
+
 
     const HeaderData = [
         { id: 1, headerName: 'Id', width: '30px', maxWidth: '30px' },

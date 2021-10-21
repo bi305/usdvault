@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import "antd/dist/antd.css";
 import { useRouter } from 'next/router';
 
-// ID, Type, Name, Price, 24Hr, Market Cap, Volume 24Hr, Circulating Supply
 const columns = [
     {
         title: 'Id',
@@ -16,9 +15,16 @@ const columns = [
     {
         title: 'Name',
         width: 100,
-        dataIndex: 'nm',
+        // dataIndex: "nm",
         key: 'id',
         fixed: 'left',
+        render: function (text, record, index) {
+
+
+            return (record.lg + record.nm + record.sm)
+
+        }
+
     },
     {
         title: 'Price',
@@ -56,6 +62,7 @@ const columns = [
 
 const Demo = () => {
 
+    const router = useRouter()
     const [fixedTop, setFixedTop] = React.useState(false);
     const [coinData, setcoinData] = useState([])
     const [Page, setPage] = useState(1);
@@ -70,7 +77,7 @@ const Demo = () => {
             setLoading(true)
             try {
                 const res = await fetch(
-                    `http://api.usdvault.com/get/table?page=${pageSize}&limit=${limit}`
+                    `http://get.usdvault.com/home/coin-table?page=${pageSize}&limit=${limit}`
                 );
                 const data = await res.json();
 
@@ -95,6 +102,9 @@ const Demo = () => {
 
     return (
         <>
+            <button type="button" onClick={() => router.push('/about')}>
+                Click me
+            </button>
             <Table
                 loading={Loading}
                 columns={columns}
@@ -107,6 +117,13 @@ const Demo = () => {
                     onChange: (page, pageSize) => {
                         setPage(page);
                         setrowsPerPage(pageSize);
+                        const path = router.pathname
+                        const query = router.query
+                        query.page = page
+                        router.push({
+                            pathname: path,
+                            query: query.page === 1 ? '' : query,
+                        })
                     },
                 }}
 
