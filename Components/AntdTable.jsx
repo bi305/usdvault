@@ -1,34 +1,44 @@
-import { Table, Switch } from 'antd';
+import { Table, Switch, Tag } from 'antd';
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react';
 import "antd/dist/antd.css";
 import { useRouter } from 'next/router';
+import { style } from '@mui/system';
 
 const columns = [
     {
         title: 'Id',
-        width: 100,
-        dataIndex: 'id',
+        width: 50,
+        dataIndex: 'rk',
         key: 'name',
         fixed: 'left',
 
     },
     {
         title: 'Name',
-        width: 100,
-        // dataIndex: "nm",
+        width: '160px',
         key: 'id',
         fixed: 'left',
         render: function (text, record, index) {
+            return (
+                <>
 
+                    < div style={{}}>
+                        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="logo" width="25px" />
 
-            return (record.lg + record.nm + record.sm)
+                        <span className="mx-2" style={{ fontSize: "13px", fontWeight: "bolder" }}>
+                            <Link href={`/Crypto/currency/` + record.sl}>{record.nm}</Link></span>
 
+                        <Tag style={{ borderRadius: '7px' }}>{record.sm}</Tag>
+                    </div >
+
+                </>
+            )
         }
-
     },
     {
         title: 'Price',
-        dataIndex: 'logo',
+        dataIndex: 'pr',
         key: '1',
         width: 150,
     },
@@ -102,11 +112,9 @@ const Demo = () => {
 
     return (
         <>
-            <button type="button" onClick={() => router.push('/about')}>
-                Click me
-            </button>
+
             <Table
-                loading={Loading}
+                // loading={Loading}
                 columns={columns}
                 dataSource={alldata}
                 pagination={{
